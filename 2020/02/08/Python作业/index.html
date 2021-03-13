@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://Shaw-Yin.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Python作业已更新至第八章：文件 模组">
+<meta name="keywords" content="homework">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PYTHON Homework">
+<meta property="og:url" content="https:&#x2F;&#x2F;shaw-yin.github.io&#x2F;2020&#x2F;02&#x2F;08&#x2F;Python%E4%BD%9C%E4%B8%9A&#x2F;index.html">
+<meta property="og:site_name" content="Shaw Yin">
+<meta property="og:description" content="Python作业已更新至第八章：文件 模组">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;02&#x2F;08&#x2F;BkTDnyYKegFpW2X.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;64984100_1574170865.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;16914700_1574170875.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;55546100_1574170886.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;60170100_1570695615.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;81530700_1570695615.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;1794100_1570695616.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;1794100_1570695616.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;615100_1570695681.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;33841800_1570695681.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;88023100_1570695737.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;8194700_1570695738.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;6570100_1570695802.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;24479800_1570695802.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;65657300_1570695855.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;42468600_1574171099.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;77539900_1574171099.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;wechatapppro-1252524126.file.myqcloud.com&#x2F;appuaAoe86p4947&#x2F;image&#x2F;ueditor&#x2F;9413300_1574171100.png">
+<meta property="og:updated_time" content="2020-02-18T13:00:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.loli.net&#x2F;2020&#x2F;02&#x2F;08&#x2F;BkTDnyYKegFpW2X.png">
+
+<link rel="canonical" href="https://shaw-yin.github.io/2020/02/08/Python%E4%BD%9C%E4%B8%9A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>PYTHON Homework | Shaw Yin</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shaw Yin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-主页">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>主页</a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-时光轴">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>时光轴</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://Shaw-Yin.github.io/2020/02/08/Python%E4%BD%9C%E4%B8%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/fuji.svg">
+      <meta itemprop="name" content="Shaw Yin">
+      <meta itemprop="description" content="学习笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shaw Yin">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PYTHON Homework
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-08 10:01:31" itemprop="dateCreated datePublished" datetime="2020-02-08T10:01:31+08:00">2020-02-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-18 21:00:24" itemprop="dateModified" datetime="2020-02-18T21:00:24+08:00">2020-02-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/Python%E5%9F%BA%E7%A1%80-%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E5%85%A5%E9%97%A8%E8%AE%AD%E7%BB%83%E8%90%A5/" itemprop="url" rel="index">
+                    <span itemprop="name">Python基础+数据科学入门训练营</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Python作业"><a href="#Python作业" class="headerlink" title="Python作业"></a>Python作业</h1><p>已更新至第八章：文件 模组</p>
+<a id="more"></a>
+
+
+
+<h3 id="Python基本语法元素-习题"><a href="#Python基本语法元素-习题" class="headerlink" title="Python基本语法元素 习题"></a>Python基本语法元素 习题</h3><h4 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1.数据类型"></a>1.数据类型</h4><ul>
+<li>列表属于 序列 类型，元组属于 序列 类型，字典属于 映射 类型。</li>
+<li>集合内的元素是否可以重复  不可以</li>
+</ul>
+<h4 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h4><ul>
+<li><p>判断一下变量命名是否合法</p>
+<p>A._boy  B. 4student C.class D.first number</p>
+<p>B，C, D错误 命名首字母不能是数字，class 为保留字，命名中间不能有空格</p>
+</li>
+<li><p>请将1，2，3，4，5 打包赋值给变量 a,b,c,d,e</p>
+<p>a,b,c,d,e = 1,2,3,4,5</p>
+</li>
+<li><p>请分别用下划线命名方式和驼峰体命名方式命名一个变量</p>
+<p>this_is_underline = 1</p>
+<p>ThisIsCamel = 2</p>
+</li>
+</ul>
+<h4 id="3-控制语句"><a href="#3-控制语句" class="headerlink" title="3.控制语句"></a>3.控制语句</h4><ul>
+<li><p>分别简述 for 循环、while 循环和if分支语句的执行过程</p>
+<p>for i in iteration：</p>
+<p>​        代码</p>
+</li>
+<li><p>while（判断）：</p>
+<p>​        代码</p>
+</li>
+<li><p>if （）：</p>
+<p>​        代码</p>
+<p>else（）：</p>
+<p>​        代码</p>
+</li>
+</ul>
+<h4 id="4-输入输出"><a href="#4-输入输出" class="headerlink" title="4.输入输出"></a>4.输入输出</h4><ul>
+<li>用input语句分别输入两个数字，并实现两个数字的相乘</li>
+</ul>
+<p>a=eval(input(“please enter number a”))</p>
+<p>b=eval(input(“please enter number b”))</p>
+<p>print(a,b,”a times b = “,a*b)</p>
+<ul>
+<li>用 format 分别实现黄金分割比值 0.6180339887 保留前三位的浮点数输出以及保留一位小数的百分比输出</li>
+</ul>
+<p>GOLDNUM = 0.6180339887</p>
+<p>print(“{0:.3f},{0:.1%}”.format(GOLDNUM))</p>
+<ul>
+<li><p>将下列 X 处代码补全，实现如图所示的格式化输出</p>
+<p>for i in [0,1,2,3,4,5]:</p>
+<p>​    print(“{X1}”.format(“X2”<em>(2</em>i+1)))</p>
+<p><a href="https://sm.ms/image/BkTDnyYKegFpW2X" target="_blank"><img src="https://i.loli.net/2020/02/08/BkTDnyYKegFpW2X.png" ></a></p>
+</li>
+</ul>
+<p>X1: 0:-^20</p>
+<p>X2: *</p>
+<h4 id="5-程序格式"><a href="#5-程序格式" class="headerlink" title="5.程序格式"></a>5.程序格式</h4><ul>
+<li><p>一下格式是否符合 PEP8 的格式建议</p>
+<p>A     x*=10                      rectify:    x *= 10</p>
+<p>B     y = (3-1)/8               rectify:    (3-1) / 8</p>
+<p>C     t = (1,2,3,4,5)          rectify:    t = (1, 2, 3, 4, 5)</p>
+<p>D     x =         10              rectify:    x = 10</p>
+<p>E    def fun(x = 1,y=2)    rectify:    def fun(x=1, y=2)</p>
+<p>F     if m &gt; 3:                    rectify： if m &gt; 3:</p>
+<p>​       print(“m大于3”)                                print(“m大于3”)</p>
+</li>
+</ul>
+<h3 id="基本数据类型-习题"><a href="#基本数据类型-习题" class="headerlink" title="基本数据类型 习题"></a>基本数据类型 习题</h3><p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/64984100_1574170865.png" alt="3.1.PNG"></p>
+<p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/16914700_1574170875.png" alt="3.2.PNG"></p>
+<p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/55546100_1574170886.png" alt="3.3.PNG"></p>
+<p>my answer:</p>
+<p>填空题:</p>
+<ul>
+<li><p>6,400</p>
+</li>
+<li><p>2.5,2</p>
+<p>2,3</p>
+</li>
+<li><p>3.14,3</p>
+</li>
+</ul>
+<p>操作题</p>
+<ul>
+<li><p>s[:6] </p>
+<p>s[-26:-21:-1]</p>
+</li>
+<li><p>s.title()</p>
+</li>
+<li><p>s.count(‘o’)</p>
+</li>
+<li><p>s.replace(“Python”,”C++”)</p>
+</li>
+<li><p>a = s.split(‘ ‘)</p>
+</li>
+<li><p>“*”.join(a)</p>
+</li>
+<li><p>a = bin(255)</p>
+<p>oct(255)</p>
+<p>hex(255)</p>
+<p>int(a,2)   #binary case</p>
+</li>
+</ul>
+<p>判断题</p>
+<ul>
+<li>F</li>
+<li>T</li>
+<li>F</li>
+<li>T！！</li>
+<li>T</li>
+<li>F</li>
+</ul>
+<h3 id="复合的数据类型"><a href="#复合的数据类型" class="headerlink" title="复合的数据类型"></a>复合的数据类型</h3><p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/60170100_1570695615.png" alt="image.png"></p>
+<p>1.</p>
+<p>a = []<br>a<br>for i in range(1,101):<br>    while(i%2 == 0):<br>        a.append(i)<br>        break<br>print(a)</p>
+<p>2.</p>
+<ul>
+<li>ls[2],ls[-3]</li>
+<li>ls[1:4:2]</li>
+<li>ls[::-1]</li>
+</ul>
+<p>3.</p>
+<ul>
+<li><p>ls.append(‘toyota’)</p>
+</li>
+<li><p>cars.insert(1,’chery’)</p>
+</li>
+<li><p>cars.extend([‘bmw’,’benz’])</p>
+</li>
+<li><p>cars.pop(3),cars.pop(3)</p>
+</li>
+<li><p>cars.remove(‘geely’)</p>
+</li>
+<li><p>cars[cars.index(‘chery’)] = ‘qq’</p>
+</li>
+<li><p>b = cars.copy()  a = cars[:]</p>
+</li>
+<li><p>enternal:cars.sort() temporary: sorted(cars,reverse=false)</p>
+</li>
+<li><p>cars.reverse()</p>
+</li>
+</ul>
+<p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/81530700_1570695615.png" alt="image.png"></p>
+<p>4.</p>
+<ul>
+<li>一旦定义，内部元素不可增删改查</li>
+</ul>
+<p>5.</p>
+<p>for food,prices in zip(food,prices):<br>    print(‘The price of {} is {}’.format(food,prices))</p>
+<p>6.BD不合法</p>
+<p>7.</p>
+<ul>
+<li>len()</li>
+<li>dict[‘Jen’]</li>
+<li>favorite_fruits[‘Tom’] = ‘peach’<br>favorite_fruits[‘Bob’] = ‘Tomato’</li>
+<li>del favorite_fruits[‘Judy’]</li>
+<li>favorite_fruits.popitem()</li>
+<li>favorite_fruits[‘Sarah’] = ‘watermelon’</li>
+<li>for key,value in favorite_fruits.items():<pre><code>print(&quot;{}&apos; favourite fruit is {} &quot;.format(key,value))</code></pre></li>
+</ul>
+<p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/1794100_1570695616.png" alt="image.png"></p>
+<p>8.</p>
+<p>d = {}<br>for i in s:<br>    d[i] = d.get(i,0)+1<br>    print(d)</p>
+<p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/1794100_1570695616.png" alt="image.png"></p>
+<p>9.</p>
+<ul>
+<li><p>vegetables.remove(‘meat’)</p>
+</li>
+<li><p>vegetables.add(‘eggplant’)</p>
+</li>
+<li><p>vegetables&amp;fruits</p>
+</li>
+<li><p>vegetables|fruits</p>
+</li>
+<li><p>vegetables-fruits</p>
+</li>
+<li><p>vegetables^fruits</p>
+</li>
+</ul>
+<h3 id="程序控制结构"><a href="#程序控制结构" class="headerlink" title="程序控制结构"></a>程序控制结构</h3><p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/615100_1570695681.png" alt="image.png"></p>
+<ol>
+<li></li>
+</ol>
+<ul>
+<li>空的</li>
+<li>true</li>
+<li>true true</li>
+</ul>
+<p>2.1</p>
+<p>color = input(‘fetch a ball’)<br>if color == ‘black’:<br>    print(‘you win 0 ‘)<br>elif color == ‘white’:<br>    print(‘win 10’)<br>elif color == ‘blue’:<br>    print(‘win 20’)<br>elif color == ‘pink’:<br>    print(‘win 30’)<br>elif color == ‘purple’:<br>    print(‘win 50’)</p>
+<p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/33841800_1570695681.png" alt="image.png"></p>
+<p>3.</p>
+<p>for i in range(1, 10):<br>    for j in range(1, i + 1):<br>        print(“{} × {} = {}”.format(j, i, i * j), end=”  “)<br>    print()</p>
+<p>4.</p>
+<p>students_of_grande3_class2 = {}<br>flag = True<br>while flag:<br>    first_input = input(‘please input your data’)<br>    if first_input in [‘q’,’Q’]:<br>        flag = False<br>        print(‘program end’)<br>    else:<br>        second_input = input(‘please input second data’)<br>        students_of_grande3_class2[first_input] = second_input</p>
+<p>5.</p>
+<p>死循环</p>
+<p>6.代码难以阅读</p>
+<p>7.拆分条件测试</p>
+<h3 id="函数-面向过程的编程"><a href="#函数-面向过程的编程" class="headerlink" title="函数-面向过程的编程"></a>函数-面向过程的编程</h3><p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/88023100_1570695737.png" alt="image.png"></p>
+<p>1.</p>
+<ul>
+<li><p>T</p>
+</li>
+<li><p>T</p>
+</li>
+<li><pre><code>a
+(&apos;b&apos;, &apos;c&apos;, &apos;d&apos;)
+{&apos;name&apos;: &apos;Sarah&apos;, &apos;age&apos;: 18}
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2.</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line">import random</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    win_rate_A, win_rate_B, number_of_games = get_input()</span><br><span class="line">    win_A, win_B, = sim_n_games(win_rate_A, win_rate_B, number_of_games)</span><br><span class="line">    print_summary(win_A, win_B, number_of_games)</span><br><span class="line"></span><br><span class="line">def get_input():</span><br><span class="line">    win_rate_A = eval(input(&apos;please input win_rate of player A: &apos;))</span><br><span class="line">    while not 1&gt;win_rate_A&gt;0 :</span><br><span class="line">            win_rate_A = eval(input(&apos;WARRING! win_rate of player A should be in (0,1), please input again: &apos;))</span><br><span class="line">    win_rate_B = round(1-win_rate_A,3)</span><br><span class="line">    number_of_games = eval(input(&apos;please input number of total games: &apos;))</span><br><span class="line">    print(&apos;total games: &#123;&#125;:&apos;.format(number_of_games))</span><br><span class="line">    print(&apos;win_rate of player A: &#123;&#125;&apos;.format(win_rate_A))</span><br><span class="line">    print(&apos;win_rate of player B: &#123;&#125;&apos;.format(win_rate_B))</span><br><span class="line">    return win_rate_A, win_rate_B, number_of_games</span><br><span class="line"></span><br><span class="line">def sim_n_games(win_rate_A, win_rate_B, number_of_games):</span><br><span class="line">    win_A, win_B = 0, 0</span><br><span class="line">    count_A, count_B = 0, 0</span><br><span class="line">    game_finish = False</span><br><span class="line">    for i in range(number_of_games):</span><br><span class="line">        game_finish = False</span><br><span class="line">        while not game_finish:</span><br><span class="line">            score_A, score_B = sim_one_game(win_rate_A, win_rate_B)</span><br><span class="line">            if score_A &gt; score_B:</span><br><span class="line">                count_A += 1</span><br><span class="line">            elif score_B &gt; score_A:</span><br><span class="line">                count_B += 1</span><br><span class="line">            if count_A == 2:</span><br><span class="line">                win_A += 1</span><br><span class="line">                count_A, count_B = 0, 0</span><br><span class="line">                game_finish = True</span><br><span class="line">            elif count_B == 2:</span><br><span class="line">                win_B += 1</span><br><span class="line">                count_A, count_B = 0, 0</span><br><span class="line">                game_finish = True</span><br><span class="line">    return win_A, win_B</span><br><span class="line"></span><br><span class="line">def sim_one_game(win_rate_A, win_rate_B):</span><br><span class="line">    score_A, score_B = 0, 0</span><br><span class="line">    while not game_over(score_A, score_B):</span><br><span class="line">        if random.random() &lt; win_rate_A:</span><br><span class="line">            score_A += 1</span><br><span class="line">        else:</span><br><span class="line">            score_B += 1</span><br><span class="line">    return score_A, score_B</span><br><span class="line"></span><br><span class="line">def game_over(score_A, score_B):</span><br><span class="line">    return ((score_A&gt;=21)&amp;(score_A-score_B&gt;=2)) or ((score_B&gt;=21)&amp;(score_B-score_A&gt;=2))</span><br><span class="line"></span><br><span class="line">def print_summary(win_A, win_B, number_of_games):</span><br><span class="line">    print(&apos;total simulation:&#123;&#125;&apos;.format(number_of_games))</span><br><span class="line">    print(&apos;player A win &#123;&#125;&apos;.format(win_A))</span><br><span class="line">    print(&apos;player B win &#123;&#125;&apos;.format(win_B))</span><br><span class="line">    </span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+<p>Output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">please input number of total games: 10000</span><br><span class="line">total games: 10000:</span><br><span class="line">win_rate of player A: 0.55</span><br><span class="line">win_rate of player B: 0.45</span><br><span class="line">total simulation:10000</span><br><span class="line">player A win 8452</span><br><span class="line">player B win 1548</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/8194700_1570695738.png" alt="image.png"></p>
+<p>3.</p>
+<p>print(sorted(a.items(), key = lambda x : x[1], reverse = True))</p>
+<h3 id="类-面向对象的编程"><a href="#类-面向对象的编程" class="headerlink" title="类-面向对象的编程"></a>类-面向对象的编程</h3><p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/6570100_1570695802.png" alt="image.png"></p>
+<p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/24479800_1570695802.png" alt="image.png"></p>
+<p>1.</p>
+<ul>
+<li>​    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnionPay_Card</span><span class="params">()</span>:</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, user_name, card_credit, current_credit, single_quota)</span>:</span></span><br><span class="line">    self.user_name = user_name</span><br><span class="line">    self.card_credit = card_credit</span><br><span class="line">    self.current_credit = current_credit</span><br><span class="line">    self.single_quota = single_quota</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_card_attr</span><span class="params">(self)</span>:</span></span><br><span class="line">    print(<span class="string">'User name :&#123;&#125; '</span>.format(self.user_name))</span><br><span class="line">    print(<span class="string">'Init credit:&#123;&#125; '</span>.format(self.card_credit))</span><br><span class="line">    print(<span class="string">'Current credit:&#123;&#125; '</span>.format(self.current_credit))</span><br><span class="line">    print(<span class="string">'Maxmium quota per withdrew:&#123;&#125; '</span>.format(self.single_quota))</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_card_credit</span><span class="params">(self, card_crddit)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self.card_credit&gt;=<span class="number">0</span>:</span><br><span class="line">        self.card_credit = card_crddit</span><br><span class="line">    print(<span class="string">"card_credit has changed to:&#123;&#125;"</span>.format(card_crddit))</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cash</span><span class="params">(self, cash_number)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> cash_number&lt;=self.card_credit <span class="keyword">and</span> cash_number&lt;=self.current_credit <span class="keyword">and</span> cash_number&lt;= self.single_quota:</span><br><span class="line">        print(<span class="string">'You have cashed &#123;&#125; dollers!'</span>.format(cash_number))</span><br><span class="line">        self.current_credit -= cash_number</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'Faild!'</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>2.</p>
+<ul>
+<li>version one1</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BOC_Card</span><span class="params">(UnionPay_Card)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, user_name, card_credit, current_credit, single_quoto, score, discount_shop)</span>:</span></span><br><span class="line">        super().__init__(user_name, card_credit, current_credit, single_quoto)</span><br><span class="line"><span class="comment">#        self.user_name = user_name</span></span><br><span class="line"><span class="comment">#        self.card_credit = card_credit</span></span><br><span class="line"><span class="comment">#        self.current_credit = current_credit</span></span><br><span class="line"><span class="comment">#        self.single_quoto = single_quoto</span></span><br><span class="line">        self.score = score</span><br><span class="line">        self.discount_shop = discount_shop</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cash</span><span class="params">(self, shop_name, cash_number)</span>:</span>    </span><br><span class="line">        <span class="keyword">if</span> cash_number&lt;=self.card_credit <span class="keyword">and</span> cash_number&lt;=self.current_credit <span class="keyword">and</span> cash_number&lt;= self.single_quota:</span><br><span class="line">            <span class="keyword">if</span> shop_name <span class="keyword">in</span> self.discount_shop:</span><br><span class="line">                print(<span class="string">'You enjoyed discount!!'</span>)</span><br><span class="line">                self.current_credit -= cash_number*<span class="number">0.95</span></span><br><span class="line">                self.score += cash_number*<span class="number">0.95</span>//<span class="number">10</span></span><br><span class="line">                print(<span class="string">'You have cashed &#123;&#125; dollers!'</span>.format(cash_number*<span class="number">0.95</span>))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.current_credit -= cash_number</span><br><span class="line">                print(<span class="string">'You have cashed &#123;&#125; dollers!'</span>.format(cash_number))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'Faild!'</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.user_name)</span><br><span class="line">        print(self.score)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>v-modified</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BOC_Card</span><span class="params">(UnionPay_Card)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, user_name, card_credit, current_credit, single_quoto, score)</span>:</span></span><br><span class="line">        super().__init__(user_name, card_credit, current_credit, single_quoto)</span><br><span class="line"><span class="comment">#        self.user_name = user_name</span></span><br><span class="line"><span class="comment">#        self.card_credit = card_credit</span></span><br><span class="line"><span class="comment">#        self.current_credit = current_credit</span></span><br><span class="line"><span class="comment">#        self.single_quoto = single_quoto</span></span><br><span class="line">        self.score = score</span><br><span class="line">        self.discount_shop = []</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cash</span><span class="params">(self, shop_name, cash_number)</span>:</span>    </span><br><span class="line">        <span class="keyword">if</span> cash_number&lt;=self.card_credit <span class="keyword">and</span> cash_number&lt;=self.current_credit <span class="keyword">and</span> cash_number&lt;= self.single_quota:</span><br><span class="line">            <span class="keyword">if</span> shop_name <span class="keyword">in</span> self.discount_shop:</span><br><span class="line">                print(<span class="string">'You enjoyed discount!!'</span>)</span><br><span class="line">                self.current_credit -= cash_number*<span class="number">0.95</span></span><br><span class="line">                self.score += cash_number*<span class="number">0.95</span>//<span class="number">10</span></span><br><span class="line">                print(<span class="string">'You have cashed &#123;&#125; dollers!'</span>.format(cash_number*<span class="number">0.95</span>))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.current_credit -= cash_number</span><br><span class="line">                print(<span class="string">'You have cashed &#123;&#125; dollers!'</span>.format(cash_number))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'Faild!'</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_score</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(self.user_name)</span><br><span class="line">        print(self.score)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_discount_shop</span><span class="params">(self, discount_shop)</span>:</span></span><br><span class="line">        self.discount_shop.append(discount_shop)</span><br><span class="line">        print(self.discount_shop)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="文件、异常和模块"><a href="#文件、异常和模块" class="headerlink" title="文件、异常和模块"></a>文件、异常和模块</h3><p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/65657300_1570695855.png" alt="image.png"></p>
+<p>1.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;&#125;</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'笑傲江湖.txt'</span>, <span class="string">'r'</span>, encoding = <span class="string">'gbk'</span>)<span class="keyword">as</span> t:</span><br><span class="line">    ls = t.read()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> ls:</span><br><span class="line">        d[i] = d.get(i, <span class="number">0</span>)+<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'笑傲江湖_字数统计.txt'</span>, <span class="string">'w'</span>, encoding = <span class="string">'gbk'</span>)<span class="keyword">as</span> t:</span><br><span class="line">    <span class="keyword">for</span> k,v <span class="keyword">in</span> d.items():</span><br><span class="line">        t.writelines(<span class="string">'&#123;&#125;: &#123;&#125; \n'</span>.format(k, v))</span><br></pre></td></tr></table></figure>
+
+<p>2.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        num = eval(input(<span class="string">'Please input number(s)'</span>))</span><br><span class="line">    <span class="keyword">except</span> Exception:</span><br><span class="line">        print(<span class="string">'what you have entered is not a number(s)'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'what you have entered is &#123;&#125;'</span>.format(num))</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>3.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> screening_prime <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_veg</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> range(n+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> is_prime(a):</span><br><span class="line">            print(a,end=<span class="string">' '</span>)</span><br><span class="line"></span><br><span class="line">is_veg(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>附录</p>
+<p>判断是否为素数的程序：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="string">'''判断一个数是否为素数'''</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, int(sqrt(num)) + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> num % i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h3 id="第九章-有益的探索（）"><a href="#第九章-有益的探索（）" class="headerlink" title="第九章 有益的探索（）"></a>第九章 有益的探索（）</h3><p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/42468600_1574171099.png" alt="image.png"></p>
+<p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/77539900_1574171099.png" alt="image.png"></p>
+<p><img src="http://wechatapppro-1252524126.file.myqcloud.com/appuaAoe86p4947/image/ueditor/9413300_1574171100.png" alt="image.png"></p>
+<p>第一题</p>
+<p>[1, 1, 1]</p>
+<p>[</p>
+<p>[name:mary, id:2]</p>
+<p>[name:mary, id:2]</p>
+<p>[name:mary, id:2]</p>
+<p>]</p>
+<p>第二题</p>
+<p>1.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="string">'''判断一个数是否为素数'''</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, int(sqrt(num)) + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> num % i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">100</span>) <span class="keyword">if</span> is_prime(i)]</span><br></pre></td></tr></table></figure>
+
+<p>2.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> pow</span><br><span class="line"></span><br><span class="line">x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">y = [<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>]</span><br><span class="line">z = [pow(x[i], y[i]) <span class="keyword">for</span> i <span class="keyword">in</span> range(len(x))]</span><br><span class="line">z</span><br></pre></td></tr></table></figure>
+
+<p>3.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z = x <span class="keyword">if</span> x &gt; y <span class="keyword">else</span> y</span><br><span class="line">z</span><br></pre></td></tr></table></figure>
+
+<p>第三题：</p>
+<p>1.有点难 </p>
+<p>2.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">good = &#123;<span class="string">'water'</span>:<span class="number">1.5</span>, <span class="string">'egg'</span>:<span class="number">1</span>, <span class="string">'meat'</span>:<span class="number">15</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">(good_name, number)</span>:</span></span><br><span class="line">    res = change(good_name, number)</span><br><span class="line">    print(<span class="string">'happy midautumn'</span>)</span><br><span class="line">    <span class="keyword">return</span> res*<span class="number">0.8</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span><span class="params">(good_name, number)</span>:</span></span><br><span class="line">    total = good[good_name]*number</span><br><span class="line">    <span class="keyword">if</span> <span class="number">5</span>&lt;number&lt;<span class="number">11</span>:</span><br><span class="line">        <span class="keyword">return</span> total * <span class="number">0.95</span></span><br><span class="line">    <span class="keyword">if</span> number&gt;<span class="number">10</span>:</span><br><span class="line">        <span class="keyword">return</span> total * <span class="number">0.9</span></span><br><span class="line">    <span class="keyword">return</span> total</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/homework/" rel="tag"># homework</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/07/What's%20the%20answer/" rel="prev" title="What's the answer">
+      <i class="fa fa-chevron-left"></i> What's the answer
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/08/Py%E8%84%91%E5%9B%BE/" rel="next" title="Py脑图">
+      Py脑图 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python作业"><span class="nav-number">1.</span> <span class="nav-text">Python作业</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python基本语法元素-习题"><span class="nav-number">1.0.1.</span> <span class="nav-text">Python基本语法元素 习题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-数据类型"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">1.数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-变量"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">2.变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-控制语句"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">3.控制语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-输入输出"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">4.输入输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-程序格式"><span class="nav-number">1.0.1.5.</span> <span class="nav-text">5.程序格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本数据类型-习题"><span class="nav-number">1.0.2.</span> <span class="nav-text">基本数据类型 习题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合的数据类型"><span class="nav-number">1.0.3.</span> <span class="nav-text">复合的数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序控制结构"><span class="nav-number">1.0.4.</span> <span class="nav-text">程序控制结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数-面向过程的编程"><span class="nav-number">1.0.5.</span> <span class="nav-text">函数-面向过程的编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类-面向对象的编程"><span class="nav-number">1.0.6.</span> <span class="nav-text">类-面向对象的编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件、异常和模块"><span class="nav-number">1.0.7.</span> <span class="nav-text">文件、异常和模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第九章-有益的探索（）"><span class="nav-number">1.0.8.</span> <span class="nav-text">第九章 有益的探索（）</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shaw Yin"
+      src="/images/fuji.svg">
+  <p class="site-author-name" itemprop="name">Shaw Yin</p>
+  <div class="site-description" itemprop="description">学习笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://douban.com/" title="豆瓣 → http:&#x2F;&#x2F;douban.com" rel="noopener" target="_blank">豆瓣</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://bilibili.com/" title="哔哩哔哩 → http:&#x2F;&#x2F;bilibili.com" rel="noopener" target="_blank">哔哩哔哩</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://zmz2019.com/" title="字幕组 → http:&#x2F;&#x2F;zmz2019.com" rel="noopener" target="_blank">字幕组</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://zimuku.la/" title="字幕库 → http:&#x2F;&#x2F;zimuku.la" rel="noopener" target="_blank">字幕库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.shanbay.com/" title="扇贝英语 → http:&#x2F;&#x2F;www.shanbay.com" rel="noopener" target="_blank">扇贝英语</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shaw Yin</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">56k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">51 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

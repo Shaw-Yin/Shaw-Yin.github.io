@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://Shaw-Yin.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":true,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="​    欢迎回来，今天我们来认识一下KNN  Lecture 2：Image Classification pipeline">
+<meta name="keywords" content="course">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS231n-W2D1">
+<meta property="og:url" content="https:&#x2F;&#x2F;shaw-yin.github.io&#x2F;2019&#x2F;12&#x2F;02&#x2F;CS231n-W2T1&#x2F;index.html">
+<meta property="og:site_name" content="Shaw Yin">
+<meta property="og:description" content="​    欢迎回来，今天我们来认识一下KNN  Lecture 2：Image Classification pipeline">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;s3-ap-south-1.amazonaws.com&#x2F;av-blog-media&#x2F;wp-content&#x2F;uploads&#x2F;2018&#x2F;08&#x2F;keylines-clustering-algorithm-768x664.png">
+<meta property="og:updated_time" content="2020-02-06T02:04:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;s3-ap-south-1.amazonaws.com&#x2F;av-blog-media&#x2F;wp-content&#x2F;uploads&#x2F;2018&#x2F;08&#x2F;keylines-clustering-algorithm-768x664.png">
+
+<link rel="canonical" href="https://shaw-yin.github.io/2019/12/02/CS231n-W2T1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>CS231n-W2D1 | Shaw Yin</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shaw Yin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-主页">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>主页</a>
+
+  </li>
+        <li class="menu-item menu-item-标签">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-时光轴">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>时光轴</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://Shaw-Yin.github.io/2019/12/02/CS231n-W2T1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/fuji.svg">
+      <meta itemprop="name" content="Shaw Yin">
+      <meta itemprop="description" content="学习笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shaw Yin">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS231n-W2D1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-02 08:48:00" itemprop="dateCreated datePublished" datetime="2019-12-02T08:48:00+08:00">2019-12-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-06 10:04:30" itemprop="dateModified" datetime="2020-02-06T10:04:30+08:00">2020-02-06</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>​    欢迎回来，今天我们来认识一下KNN</p>
+<p><img src="https://s3-ap-south-1.amazonaws.com/av-blog-media/wp-content/uploads/2018/08/keylines-clustering-algorithm-768x664.png" alt=""></p>
+<h1 id="Lecture-2：Image-Classification-pipeline"><a href="#Lecture-2：Image-Classification-pipeline" class="headerlink" title="Lecture 2：Image Classification pipeline"></a>Lecture 2：Image Classification pipeline</h1><a id="more"></a>
+
+<h3 id="P4-5"><a href="#P4-5" class="headerlink" title="P4-5"></a>P4-5</h3><h4 id="Data-Driven-Approach-数据驱动方法"><a href="#Data-Driven-Approach-数据驱动方法" class="headerlink" title="Data-Driven Approach 数据驱动方法"></a>Data-Driven Approach 数据驱动方法</h4><ol>
+<li><p>Collect a dataset of images and labels</p>
+<ol start="2">
+<li><p>Use Machine Learning to train a classifier</p>
+</li>
+<li><p>Evaluate the classifier on new images’</p>
+<p>这是一种广义的方法:</p>
+<ul>
+<li>手机大量图像数据及标签</li>
+<li>使用机器学习算法训练一个分类器</li>
+<li>是用新图像衡量训练的分类器</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="First-classifier-Nerest-Nerghbour"><a href="#First-classifier-Nerest-Nerghbour" class="headerlink" title="First classifier: Nerest Nerghbour"></a>First classifier: <em>Nerest Nerghbour</em></h4><p>近邻算法，在训练集合中找出与x距离最近的k个点，当k=1时为nn算法，k&gt;1时候 为knn算法</p>
+<h4 id="Distance-Metric-to-compare-images"><a href="#Distance-Metric-to-compare-images" class="headerlink" title="Distance Metric to compare images"></a>Distance Metric to compare images</h4><p>1.L1 (Manhattan) distance 曼哈顿距离：在各个方向（参考系）上的距离绝对值之和</p>
+<p>2.L2 (Euclidean) distance 欧拉距离：直线距离</p>
+<p>比较：改变坐标轴对L1有影响，对L2无影响</p>
+<h4 id="Setting-Hyperparameters-设定超参数"><a href="#Setting-Hyperparameters-设定超参数" class="headerlink" title="Setting Hyperparameters 设定超参数"></a>Setting Hyperparameters 设定超参数</h4><p>idea #1 : 挑选对于数据集表现最好的高参</p>
+<p>​        BAD：k=1  always works perfectly on train data</p>
+<p>idea #2 ：将数据分成训练集与测试集，选出对于两个集来说最好的高参</p>
+<p>​        BAD：无意义，参考idea1，只能得出的是对于测试集最好的高参</p>
+<p>idea #3 : 分成三组，训练集，评估集，测试集：</p>
+<p>​        GOOD：将大部分数据作为训练集，在训练集上用不同的K来训练，在评估集上进行评估并选出一个最佳的超参，最后再在测试集上测试一次，这个一次得出的结果能告诉你你的模型在未知的数据集上的表现</p>
+<p>idea #4 : 交叉验证：拿出测试集后，将剩下的数据均分为几份，每一份作为一 fold ，然后轮流将 fold1 / fold2 /fold3 ……作为验证集，按照 idea #3 的方式验证</p>
+<p>​        GOOD：比较繁琐，适用于小型的数据集</p>
+<h4 id="k-Nearest-Neighbour-on-images-never-used"><a href="#k-Nearest-Neighbour-on-images-never-used" class="headerlink" title="k-Nearest Neighbour on images : never used"></a>k-Nearest Neighbour on images : never used</h4><ul>
+<li><p><a href="[https://baike.baidu.com/item/%E7%BB%B4%E6%95%B0%E7%81%BE%E9%9A%BE/6788619?fr=aladdin](https://baike.baidu.com/item/维数灾难/6788619?fr=aladdin)">Curse of dimensionality维度灾难</a></p>
+</li>
+<li><p>训练速度慢</p>
+</li>
+<li><p>距离函数用在比较像素上不合适</p>
+</li>
+</ul>
+<h5 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h5><p><strong><em>KNN三要素</em></strong>：距离度量（eg：L1、L2等）、K值选择（一般取较小的奇数）、分类规则（一般投票多数表决）</p>
+<p><strong><em>例子</em></strong>：<a href="http://vision.stanford.edu/teaching/cs231n-demos/knn/" target="_blank" rel="noopener">http://vision.stanford.edu/teaching/cs231n-demos/knn/</a></p>
+<h3 id="tasks"><a href="#tasks" class="headerlink" title="tasks"></a>tasks</h3><ol>
+<li><p>图像分类数据和label分别是什么 图像分类存在的问题与挑战</p>
+<p>图像数据：图像在输入计算机后读出的是矩阵，矩阵的每个值代表对应位置的像素值</p>
+<p>label：给图像划分的类</p>
+<p>问题与挑战:光照，角度，遮挡，形变带来的问题</p>
+</li>
+<li><p>使用python加载一张彩色图片，观察像素值</p>
+</li>
+<li><p>L1范数，L2范数数学表达式 这两种度量分别适用于什么情况</p>
+<p>L1距离由坐标轴决定，L2距离与坐标轴无关</p>
+<p>L1范数可以进行特征选择，即让特征的系数变为0.</p>
+<p>L2范数可以防止过拟合，提升模型的泛化能力，有助于处理 condition number不好下的矩阵(数据变化很小矩阵求解后结果变化很大) （核心：L2对大数，对outlier离群点更敏感！）</p>
+<p>视坐标轴对图像有无影响来选择</p>
+</li>
+<li><p>描述近邻算法KNN NN算法复的杂度 为什么很少使用在图像中以及它存在的问题</p>
+<p>复杂度：</p>
+<p>​        训练复杂度：knn只是保存数据及标签，不涉及计算，训练复杂度为o(1)</p>
+<p>​        测试复杂度：对于某个样本x，需要与标签数据逐一进行对比，复杂度为o(N)</p>
+<p>​        时间复杂度o(n*k)：n为样本数量，k为单个样本特征的维度。如果不考虑特征维度的粒度为o(n)</p>
+<p>​        空间复杂度o(n*k)：n为样本数量，k为单个样本特征的维度。如果不考虑特征维度的粒度为o(n)</p>
+<p>存在的问题：当训练集很大的时候，需要的存储空间大，测试速度慢，距离函数不适合用在比较像素上。需要计算每个待测样本和训练样本之间的距离，计算很耗时；会造成维数灾难，比方说两个很相似的样本，但由于维度很高，两者之间的距离也会很大。</p>
+</li>
+<li><p>了解cira10数据集</p>
+<p>cifar10数据库由10类数据组成，有50000张作为训练集，10000张作为测试集，分布在这10类上</p>
+<p>each image is 32x32x3</p>
+</li>
+<li><p>超参数怎么选择合适（即数据集如何划分）</p>
+<p>分为训练集，验证集，测试集或者采用交叉验证</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/course/" rel="tag"># course</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/29/CS231n-W1T1/" rel="prev" title="CS231n-W1T1">
+      <i class="fa fa-chevron-left"></i> CS231n-W1T1
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/06/CS231n-W2T2/" rel="next" title="CS231n-W2T2">
+      CS231n-W2T2 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-2：Image-Classification-pipeline"><span class="nav-number">1.</span> <span class="nav-text">Lecture 2：Image Classification pipeline</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#P4-5"><span class="nav-number">1.0.1.</span> <span class="nav-text">P4-5</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Driven-Approach-数据驱动方法"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">Data-Driven Approach 数据驱动方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#First-classifier-Nerest-Nerghbour"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">First classifier: Nerest Nerghbour</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Distance-Metric-to-compare-images"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">Distance Metric to compare images</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Setting-Hyperparameters-设定超参数"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">Setting Hyperparameters 设定超参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#k-Nearest-Neighbour-on-images-never-used"><span class="nav-number">1.0.1.5.</span> <span class="nav-text">k-Nearest Neighbour on images : never used</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#补充："><span class="nav-number">1.0.1.5.1.</span> <span class="nav-text">补充：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tasks"><span class="nav-number">1.0.2.</span> <span class="nav-text">tasks</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shaw Yin"
+      src="/images/fuji.svg">
+  <p class="site-author-name" itemprop="name">Shaw Yin</p>
+  <div class="site-description" itemprop="description">学习笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="http://douban.com/" title="豆瓣 → http:&#x2F;&#x2F;douban.com" rel="noopener" target="_blank">豆瓣</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://bilibili.com/" title="哔哩哔哩 → http:&#x2F;&#x2F;bilibili.com" rel="noopener" target="_blank">哔哩哔哩</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://zmz2019.com/" title="字幕组 → http:&#x2F;&#x2F;zmz2019.com" rel="noopener" target="_blank">字幕组</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://zimuku.la/" title="字幕库 → http:&#x2F;&#x2F;zimuku.la" rel="noopener" target="_blank">字幕库</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.shanbay.com/" title="扇贝英语 → http:&#x2F;&#x2F;www.shanbay.com" rel="noopener" target="_blank">扇贝英语</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shaw Yin</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">56k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">51 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -12,15 +12,15 @@
     
     <meta name="keywords" content="Hexo" />
     
-    <meta name="description" content="一最近又憋了一脑子想法(重启blog也是其中之一)。我不想再让他们自生自灭，那样太残忍，不如就记录下来吧，于是我的blog重启了。 二 before start在上手之前，得先想想怎么开干。我的blog很简单，hexo+github page，原来用的是next主题。blog根目录直接设在了OneDrive里，不用担心备份问题，所以问题主要就是如何在这个新系统中重新启动。主要是配置环境,大概有以下">
+    <meta name="description" content="2022&#x2F;1&#x2F;6更新考试结束了，捣鼓一下blog吧。 捣鼓中Q1：无法直接在git里直接用hexo命令启动了 A： 1)笔记本大概经历过重装系统，因此 node hexo 都没有了，需要重新安装。node.js （js的运行环境&#x2F;框架）官网下载，安装在默认目录， hexo 基于node.js 2)请对hexo使用全局安装方式，会安装到nodejs默认的位置，不然会安装到当前位置，全局安装(-glo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="blog重启">
 <meta property="og:url" content="https://shaw-yin.github.io/2021/03/13/blog%E9%87%8D%E5%90%AF/index.html">
 <meta property="og:site_name" content="Shaw Yin">
-<meta property="og:description" content="一最近又憋了一脑子想法(重启blog也是其中之一)。我不想再让他们自生自灭，那样太残忍，不如就记录下来吧，于是我的blog重启了。 二 before start在上手之前，得先想想怎么开干。我的blog很简单，hexo+github page，原来用的是next主题。blog根目录直接设在了OneDrive里，不用担心备份问题，所以问题主要就是如何在这个新系统中重新启动。主要是配置环境,大概有以下">
+<meta property="og:description" content="2022&#x2F;1&#x2F;6更新考试结束了，捣鼓一下blog吧。 捣鼓中Q1：无法直接在git里直接用hexo命令启动了 A： 1)笔记本大概经历过重装系统，因此 node hexo 都没有了，需要重新安装。node.js （js的运行环境&#x2F;框架）官网下载，安装在默认目录， hexo 基于node.js 2)请对hexo使用全局安装方式，会安装到nodejs默认的位置，不然会安装到当前位置，全局安装(-glo">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-13T14:22:44.000Z">
-<meta property="article:modified_time" content="2021-03-13T15:02:38.000Z">
+<meta property="article:modified_time" content="2022-01-06T03:27:11.220Z">
 <meta property="article:author" content="Shaw Yin">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
@@ -178,7 +178,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2021/03/13/blog%E9%87%8D%E5%90%AF/" class="article-date">
-     <time datetime="2021-03-13T15:02:38.000Z" itemprop="dateModified">2021-03-13</time>
+     <time datetime="2022-01-06T03:27:11.220Z" itemprop="dateModified">2022-01-06</time>
   </a>
 </div>
 
@@ -205,17 +205,12 @@
 
             
 
-            <h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>最近又憋了一脑子想法(重启blog也是其中之一)。我不想再让他们自生自灭，那样太残忍，不如就记录下来吧，于是我的blog重启了。</p>
-<h2 id="二-before-start"><a href="#二-before-start" class="headerlink" title="二 before start"></a>二 before start</h2><p>在上手之前，得先想想怎么开干。我的blog很简单，hexo+github page，原来用的是next主题。blog根目录直接设在了OneDrive里，不用担心备份问题，所以问题主要就是如何在这个新系统中重新启动。<br>主要是配置环境,大概有以下需求：</p>
-<ul>
-<li>搭建hexo需要node.js</li>
-<li>同步到GitHub page需要git</li>
-</ul>
-<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>首先我将blog文件夹从OneDrive云端同步了下来，然后安装node.js,这时候出现了坑1：node.js当前的14版本与hexo不兼容，控制面板里卸载后找了个13版本的重新安装就好了。  </p>
-<p>接着我按照hexo官方文档安装了hexo，不过根据其他的一个blog说，若文件完备，不需要在安装hexo，直接npm install即可，这里我未做尝试，也许下次可以试试。  </p>
-<p>还需要配置github ssh key，在github的setting里可以找到。  </p>
-<p>最后需要git安装hexo部署工具(嘿嘿我还记得markdown代码格式)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+            <h3 id="2022-1-6更新"><a href="#2022-1-6更新" class="headerlink" title="2022/1/6更新"></a>2022/1/6更新</h3><p>考试结束了，捣鼓一下blog吧。</p>
+<h5 id="捣鼓中"><a href="#捣鼓中" class="headerlink" title="捣鼓中"></a>捣鼓中</h5><p>Q1：无法直接在git里直接用hexo命令启动了</p>
+<p>A：</p>
+<p>1)笔记本大概经历过重装系统，因此 node hexo 都没有了，需要重新安装。node.js （js的运行环境/框架）官网下载，安装在默认目录， hexo 基于node.js</p>
+<p>2)请对hexo使用全局安装方式，会安装到nodejs默认的位置，不然会安装到当前位置，全局安装(-global)命令： </p>
+<figure class="highlight plain"><figcaption><span>install -g hexo-cli```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Q2： hexo d 的时候需要再次确认git身份</span><br><span class="line"></span><br><span class="line">A：只需等待弹窗完成GitHub登录，不行再按照git里的提示输出用户名</span><br><span class="line"></span><br><span class="line">##### new target</span><br><span class="line"></span><br><span class="line"> Notion 那么好用，能否将 Notion 作为博客模板？</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">###### below as date: 2021-03-13 22:22:44</span><br><span class="line"></span><br><span class="line">## 一 </span><br><span class="line"></span><br><span class="line">最近又憋了一脑子想法(重启blog也是其中之一)。我不想再让他们自生自灭，那样太残忍，不如就记录下来吧，于是我的blog重启了。</span><br><span class="line">## 二 before start</span><br><span class="line">在上手之前，得先想想怎么开干。我的blog很简单，hexo+github page，原来用的是next主题。blog根目录直接设在了OneDrive里，不用担心备份问题，所以问题主要就是如何在这个新系统中重新启动。</span><br><span class="line">主要是配置环境,大概有以下需求：</span><br><span class="line"></span><br><span class="line">- 搭建hexo需要node.js</span><br><span class="line">- 同步到GitHub page需要git</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 三 </span><br><span class="line">首先我将blog文件夹从OneDrive云端同步了下来，然后安装node.js,这时候出现了坑1：node.js当前的14版本与hexo不兼容，控制面板里卸载后找了个13版本的重新安装就好了。  </span><br><span class="line"></span><br><span class="line">接着我按照hexo官方文档安装了hexo，不过根据其他的一个blog说，若文件完备，不需要在安装hexo，直接npm install即可，这里我未做尝试，也许下次可以试试。  </span><br><span class="line"></span><br><span class="line">还需要配置github ssh key，在github的setting里可以找到。  </span><br><span class="line"></span><br><span class="line">最后需要git安装hexo部署工具(嘿嘿我还记得markdown代码格式)</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 <p>齐活了！然后hexo s啥的就行了。</p>
 <h2 id="四-new-skin"><a href="#四-new-skin" class="headerlink" title="四 new skin"></a>四 new skin</h2><p>blog重获新生，我要给她换件新衣庆祝庆祝🎉，又是一顿baidu，找到了hueman这个主题，很合心意！so beat it!</p>
 <p>其次是进行了一点点改动，首先去<a href="https://logomakr.com/" target="_blank" rel="noopener">https://logomakr.com/</a> 这个网站设计了免费的logo，放到/source/css/images里面。</p>
@@ -228,7 +223,7 @@
 
 
 
-    <a data-url="https://shaw-yin.github.io/2021/03/13/blog%E9%87%8D%E5%90%AF/" data-id="cky2dqep2000yowvwgnbhba9u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://shaw-yin.github.io/2021/03/13/blog%E9%87%8D%E5%90%AF/" data-id="cky2esi7h000vs0vw3ottfl6r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -304,11 +299,14 @@
         "genre": "blog",
         "datePublished": "2021-03-13",
         "dateCreated": "2021-03-13",
-        "dateModified": "2021-03-13",
+        "dateModified": "2022-01-06",
         "url": "https://Shaw-Yin.github.io/2021/03/13/blog重启/",
-        "description": "一最近又憋了一脑子想法(重启blog也是其中之一)。我不想再让他们自生自灭，那样太残忍，不如就记录下来吧，于是我的blog重启了。
-二 before start在上手之前，得先想想怎么开干。我的blog很简单，hexo+github page，原来用的是next主题。blog根目录直接设在了OneDrive里，不用担心备份问题，所以问题主要就是如何在这个新系统中重新启动。主要是配置环境,大概有以下",
-        "wordCount": 59
+        "description": "2022/1/6更新考试结束了，捣鼓一下blog吧。
+捣鼓中Q1：无法直接在git里直接用hexo命令启动了
+A：
+1)笔记本大概经历过重装系统，因此 node hexo 都没有了，需要重新安装。node.js （js的运行环境/框架）官网下载，安装在默认目录， hexo 基于node.js
+2)请对hexo使用全局安装方式，会安装到nodejs默认的位置，不然会安装到当前位置，全局安装(-glo",
+        "wordCount": 150
     }
 </script>
 
